@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Issue Tracker</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f8f9fa;
+        }
+        header {
+            background-color: #343a40;
+            color: white;
+            padding: 10px;
+            text-align: center;
+        }
+        .container {
+            padding: 20px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+        th, td {
+            border: 1px solid #dee2e6;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #e9ecef;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        input, select {
+            width: 100%;
+            padding: 8px;
+            box-sizing: border-box;
+        }
+        .button {
+            display: inline-block;
+            padding: 10px 20px;
+            color: white;
+            background-color: #007bff;
+            border: none;
+            cursor: pointer;
+        }
+        .button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Simple Issue Tracker</h1>
+    </header>
+    <div class="container">
+        <div class="form-group">
+            <label for="issue-description">Issue Description</label>
+            <input type="text" id="issue-description" placeholder="Enter issue description">
+        </div>
+        <div class="form-group">
+            <label for="issue-status">Status</label>
+            <select id="issue-status">
+                <option value="Open">Open</option>
+                <option value="In Progress">In Progress</option>
+                <option value="Resolved">Resolved</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="issue-priority">Priority</label>
+            <select id="issue-priority">
+                <option value="Low">Low</option>
+                <option value="Medium">Medium</option>
+                <option value="High">High</option>
+            </select>
+        </div>
+        <button class="button" onclick="addIssue()">Add Issue</button>
+        <table id="issue-table">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Description</th>
+                    <th>Status</th>
+                    <th>Priority</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Issues will be dynamically inserted here -->
+            </tbody>
+        </table>
+    </div>
+    <script>
+        let issueCounter = 1;
+
+        function addIssue() {
+            const description = document.getElementById('issue-description').value;
+            const status = document.getElementById('issue-status').value;
+            const priority = document.getElementById('issue-priority').value;
+
+            if (description.trim() === '') {
+                alert('Issue description cannot be empty.');
+                return;
+            }
+
+            const table = document.getElementById('issue-table').getElementsByTagName('tbody')[0];
+            const newRow = table.insertRow();
+
+            const cell1 = newRow.insertCell(0);
+            const cell2 = newRow.insertCell(1);
+            const cell3 = newRow.insertCell(2);
+            const cell4 = newRow.insertCell(3);
+
+            cell1.textContent = issueCounter++;
+            cell2.textContent = description;
+            cell3.textContent = status;
+            cell4.textContent = priority;
+
+            // Clear input fields
+            document.getElementById('issue-description').value = '';
+            document.getElementById('issue-status').value = 'Open';
+            document.getElementById('issue-priority').value = 'Low';
+        }
+    </script>
+</body>
+</html>
